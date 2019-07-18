@@ -10,48 +10,56 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
-    return view('welcome');
+    return view('general');
 });
+*/
+Route::get('/', 'CategoriesController@index')->name('general');
+Route::get('/category/{category_id}', 'CategoriesController@category_posts')->name('category_posts');
+
+//Route::get("/", ["as"=>"home","uses"=>'CategoriesController@index']);
+
+
+//Route::get('/general', 'CategoriesController@index')->name('general');
 
 Auth::routes();
 
 Route::get('/home', 'Admin\HomeController@index')->name('home');
-Route::get('/courses', 'CoursesController@index')->name('courses');
-Route::get('/course/{slug}', 'CourseController@index')->name('course');
+Route::get('/posts', 'PostsController@index')->name('posts');
+Route::get('/post/{slug}', 'PostController@index')->name('post');
+
+Route::get('/categories/{category_slug}', 'CategoriesController@index')->name('categories');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('admin', 'Admin\AdminIndexController@index');
+    //Route::get('admin', 'Admin\AdminIndexController@index');
 
 
-    Route::get('admin/home', 'Admin\HomeController@index')->name('home');
-    Route::get('admin/messages{request_id}', 'Admin\MessagesController@messages')->name('messages');
-    //---------------------------------------------------------courses
+    Route::get('admin', 'Admin\HomeController@index')->name('home');
 
-    Route::get('admin/courses', 'Admin\AdminCoursesController@index')->name('admin.courses');
+    //---------------------------------------------------------posts
 
-    Route::get('admin/add-course', 'Admin\AdminCoursesController@create_form');
+    Route::get('admin/posts', 'Admin\AdminPostsController@index')->name('admin.posts');
 
-    Route::post('admin/add-course', 'Admin\AdminCoursesController@create')->name('admin.create-course');
+    Route::get('admin/add-post', 'Admin\AdminPostsController@create_form');
 
-    Route::get('admin/edit-course/{slug?}', 'Admin\AdminCoursesController@edit')->name('admin.edit-course');
+    Route::post('admin/add-post', 'Admin\AdminPostsController@create')->name('admin.create-post');
 
-    Route::post('admin/edit-course/{slug?}', 'Admin\AdminCoursesController@update')->name('admin.update-course');
+    Route::get('admin/edit-post/{slug?}', 'Admin\AdminPostsController@edit')->name('admin.edit-post');
 
-    Route::post('admin/edit-course-delete-img/{slug}', 'Admin\AdminCoursesController@deleteImg')->name('admin.deleteImg');
+    Route::post('admin/edit-post/{slug?}', 'Admin\AdminPostsController@update')->name('admin.update-post');
+
+    Route::post('admin/edit-post-delete-img/{slug}', 'Admin\AdminPostsController@deleteImg')->name('admin.deleteImg');
 
 
-    Route::get('admin/edit-course/{slug?}/delete', 'Admin\AdminCoursesController@delete')->name('admin.delete-course');
+    Route::get('admin/edit-post/{slug?}/delete', 'Admin\AdminPostsController@delete')->name('admin.delete-post');
 
-    // course request
 
-    Route::get('admin/course-request/{id}', 'Admin\CourseRequestController@index')->name('course-request');
+    //---------------------------------------------------------categories
 
-    Route::post('admin/course-request-message/{request_id}', 'Admin\CourseRequestMessageController@index')->name('course-request-message');
+    Route::get('admin/categories', 'Admin\AdminCategoriesController@index')->name('admin.categories');
 
-    Route::post('admin/start-training/{request_id}', 'Admin\StartTrainingController@index')->name('start-training');
-    Route::post('admin/close-request/{request_id}', 'Admin\CloseRequestController@index')->name('close-request');
-
+    Route::get('admin/add-category', 'Admin\AdminCategoriesController@create_form');
+    Route::post('admin/add-category', 'Admin\AdminCategoriesController@create')->name('admin.create-category');
 
 });

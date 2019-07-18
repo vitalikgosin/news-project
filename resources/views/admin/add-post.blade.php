@@ -8,7 +8,7 @@
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group mr-2">
                     <button type="button" class="btn btn-sm btn-outline-secondary">Draft</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Delete course</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Delete post</button>
                 </div>
 
             </div>
@@ -26,7 +26,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{route('admin.create-course')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.create-post')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1">Title</label>
@@ -45,7 +45,22 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">With textarea</span>
                             </div>
-                            <textarea name="course_description" class="form-control" aria-label="With textarea">{{old('course_description')}}</textarea>
+                            <textarea name="post_content" class="form-control" aria-label="With textarea">{{old('post_content')}}</textarea>
+                        </div>
+                        <br>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Category select</label>
+                            <select name="CategoryFormControlSelect" class="form-control" id="CategoryFormControlSelect">
+
+                                @foreach ($categories_id  as $key => $cat)
+                                    @foreach ($cat  as $id => $cat_name)
+
+                                        <option value="{{$id}}">{{$cat_name}}</option>
+
+                                    @endforeach
+                                @endforeach
+                            </select>
                         </div>
                         <br>
                         <div class="custom-file">
@@ -53,10 +68,7 @@
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
 
-                        <div class="form-group form-check">
-                            <input name="PublishCourse" type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Publish course</label>
-                        </div>
+
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

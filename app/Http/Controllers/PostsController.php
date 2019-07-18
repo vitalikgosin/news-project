@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Course;
+use App\Post;
 
-class CoursesController extends Controller
+class PostsController extends Controller
 {
     public function index(): \Illuminate\View\View
     {
 
-        $courses = Course::where('published', 1)
-            ->orderByDesc('created_at')
+        $posts = Post::where('published', 1)
+
+            ->orderBy('created_at', 'DESC')
             ->with('user')
 
             ->paginate(2);
 
             //->withPath('custom/url');
             //->simplePaginate(1);
-        return view('courses', ['courses' => $courses]);
+        return view('posts', ['posts' => $posts]);
     }
 }

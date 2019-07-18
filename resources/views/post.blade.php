@@ -8,23 +8,23 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h1 >{{ $coursedata->course_title }}</h1>
+                        <h1 >{{ $postdata->course_title }}</h1>
                     </div>
 
 
                             <div class="container-fluid">
                                 <div class="row">
                                 <div class="course-main-img">
-                                @if ($coursedata->course_featured_img)
-                                    <a href="{{ @route('course', $coursedata->course_slug)  }}">
-                                        <img src="{{Storage::url($coursedata->course_featured_img ) }}" class="img-fluid">
+                                @if ($postdata->post_img)
+                                    <a href="{{ @route('post', $postdata->post_slug)  }}">
+                                        <img src="{{Storage::url($postdata->post_img ) }}" class="img-fluid">
                                     </a>
                                 @endif
                                 </div>
                                 <div class="container p-3">
-                                <h3>by {{ $coursedata->user->name }}</h3>
-                                 <div class="course-desc">
-                                {!! nl2br(e($coursedata->course_description)) !!}
+                                <h3>by {{ $postdata->user->name }}</h3>
+                                 <div class="post-desc">
+                                {!! nl2br(e($postdata->post_content)) !!}
                                  </div>
                                     </div>
                             </div>
@@ -37,17 +37,7 @@
 
                 @if(Auth::user())
 
-                <form action="{{route('course-request', $coursedata->course_slug)}}" method="get">
-                    @csrf
 
-                    <div class="form-group">
-                        <label for="message">Type you message</label>
-                        <textarea name="message" class="form-control" aria-label="With textarea" rows="4">request</textarea>
-                    </div>
-                    <br>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
             </div>
 
             @else

@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use App\CourseRequest;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
+use App\Post;
 
 class HomeController extends Controller
 {
@@ -26,20 +26,20 @@ class HomeController extends Controller
     public function index()
     {
 
-        $courserequests = CourseRequest::where('user_id', \Auth::id())
-            ->orderByDesc('created_at')
+        $a = Post::where('author_id', \Auth::id())
+            ->orderBy('post_title', 'desc')
             ->take(10)
             ->get();
 
-        $courserequests_received = CourseRequest::whereHas(
-            'course',
-            function ($query) {
-                $query->where('course_author_id', \Auth::id());
-            }
-        )->get();
+        //$plucked = $a->pluck('text');
 
 
-        return view('admin.general', ['requests' =>  $courserequests,'courserequests_received' => $courserequests_received]);
+        //$b = $a->toArray();
+
+        //return view('admin.posts', ['b'=> $a]);
+
+
+        return view('admin.general', ['posts'=>  $a]);
 
 
 

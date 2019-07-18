@@ -11,18 +11,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 mr-sm-auto col-lg-12 px-4">
-                    <h2> You Courses </h2>
+                    <h2> You Posts </h2>
                     <ul>
                         @foreach ($b as $c)
-                           @dump( $c['course_slug']);
-                            <li> <img class="img-thumbnail admin_course_img" src="{{Storage::url($c['course_featured_img']) }}"/></li>
+                           @dump( $c['post_slug']);
+                            <li> <img class="img-thumbnail admin_post_img" src="{{Storage::url($c['post_img']) }}"/></li>
 
-                            <li><a href="{{route('admin.edit-course', $c['course_slug'])}}">This is course Title {{$c['course_title']}}</a></li>
+                            <li><a href="{{route('admin.edit-post', $c['post_slug'])}}">This is post Title {{$c['post_title']}}</a></li>
 
-                            <li>This is course id {{$c['id']}}</li>
-                             <li>This is course content {{$c['course_description']}}</li>
-                            @if ($c['course_featured_img'] )
-                                <li class="feature_img">{{$c['course_featured_img'] }}</li>
+                            <li>This is post id {{$c['id']}}</li>
+                             <li>This is post content {{$c['post_content']}}</li>
+                            @if ($c['post_featured_img'] )
+                                <li class="feature_img">{{$c['post_img'] }}</li>
 
                             @endif
                             <li>

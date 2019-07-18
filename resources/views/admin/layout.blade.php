@@ -44,6 +44,7 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
@@ -53,6 +54,9 @@
                             </li>
                         @endif
                     @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">{{ __('admin') }}</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -84,7 +88,7 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link " href="/admin">
+                        <a class="nav-link " href="/admin/home">
                             <span data-feather="home"></span>
                             Dashboard <span class="sr-only">(current)</span>
                         </a>
@@ -92,12 +96,13 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-fw fa-folder"></i>
-                            <span>My Cources</span>
+                            <span>My posts</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(5px, 56px, 0px);">
-                            <a class="dropdown-item" href="http://codecoach.test/admin/courses">Courses</a>
-                            <a class="dropdown-item" href="http://codecoach.test/admin/add-course">Add New Course</a>
-                            <a class="dropdown-item" href="/category">Categories</a>
+                            <a class="dropdown-item" href="/admin/posts">Posts</a>
+                            <a class="dropdown-item" href="/admin/add-post">Add New Post</a>
+
+                            <a class="dropdown-item" href="/admin/add-category">Add New Category</a>
 
                         </div>
                     </li>
@@ -129,7 +134,7 @@
     <div class="container-fluid bg-secondary">
         <div class="container">
         <div class="row">
-            aaaa
+            footer
         </div>
         </div>
     </div>
