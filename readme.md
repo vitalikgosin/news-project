@@ -15,3 +15,11 @@
   * edit post
   * delete post
   * add category
+
+## install
+
+* clone repository
+  * composer install
+  * migration
+  * add category
+  * add posts
